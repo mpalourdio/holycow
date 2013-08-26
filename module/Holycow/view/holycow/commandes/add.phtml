@@ -1,0 +1,15 @@
+<?php
+$title = 'Passer commande';
+$this->headTitle($title);
+if ($isCommandePossible) {
+    $form->prepare();
+    $form->setAttribute(
+        'action',
+        $this->url('commandes', array('action' => 'add', 'livraisonid' => $this->livraisonid))
+    ); //action du formulaire
+    echo $this->form()->openTag($form);
+    echo $this->formCollection($form);
+    echo $this->form()->closeTag($form);
+} else {
+    echo '<h1>Trop tard :(</h1>';
+}

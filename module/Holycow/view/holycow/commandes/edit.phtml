@@ -1,0 +1,19 @@
+<?php
+$title = 'Editer une commande';
+$this->headTitle($title);
+$this->headScript()->appendScript('
+	$(function() {
+        //$("#datelivraison").datepicker();
+    });
+');
+/*
+ * NE PAS OUBLIER CE PUTAIN DE PREPARE DE MERDE !!!!!
+ * 
+ * 
+ * 
+ * 
+ */
+$form->prepare();
+echo $this->form()->openTag($form);
+echo $this->formCollection($form);
+echo $this->form()->closeTag($form);

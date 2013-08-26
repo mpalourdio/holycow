@@ -1,0 +1,30 @@
+<?php
+$title = 'can i has cheezburger';
+$this->headTitle($title);
+$this->HeadLink(
+    array(
+        'href'  => $this->url('commandes', array('action' => 'feed')),
+        'rel'   => 'alternate',
+        'type'  => "application/rss+xml",
+        'title' => 'RSS'
+    )
+);
+foreach ($livraisons as $k => $v) {
+    $style         = '';
+    $link          = $this->url('commandes', array('action' => 'add', 'livraisonid' => $v->getLivraisonid()));
+    $now           = new \DateTime('now');
+    $datedernierdelai = $v->getDatedernierdelai();
+    $interval      = $now->diff($datedernierdelai);
+    $moreorless    = $interval->format('%R');
+    if ($moreorless == '-') {
+        $style = 'style="text-decoration: line-through"';
+        $link  = "#";
+    }
+    echo '<a href="' . $link . '" ' . $style . '>' .
+            $this->dateFormat(
+            $v->getDatelivraison(),
+            IntlDateFormatter::SHORT,
+            IntlDateFormatter::SHORT
+        ) . '</a>
+<br/>';
+}
